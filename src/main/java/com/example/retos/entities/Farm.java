@@ -1,37 +1,61 @@
 package com.example.retos.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "farm")
 public class Farm implements Serializable {
-
+    // *DECLARACION VARIABLES
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "NAME")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "ADDRESS")
+    @Column(name = "address")
     private String address;
 
-    @Column(name = "EXENSION")
+    @Column(name = "exension")
     private Integer exension;
 
-    @Column(name = "CATEGORY_ID")
-    private Integer category_id;
+    @Column(name = "description")
+    private String description;
+     // relacion column ID con MESSAGES Y RESERVATION//
+    // messages
+    @OneToMany(mappedBy="farm", cascade=CascadeType.ALL)
+    private Set<Messages>message=new HashSet<>();
+    // reservation
+    @OneToMany(mappedBy="farm", cascade=CascadeType.ALL)
+    private Set<Reservation>reservation=new HashSet<>();
+    // VARIABLES CON RELACION CATEGOTY
+    @OneToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
+  
+
+    // *CONSTRUCTOR
+   
     public Farm() {
+       
     }
 
+    // *GETTER Y SETTERS
     public Integer getId() {
         return id;
     }
@@ -64,13 +88,20 @@ public class Farm implements Serializable {
         this.exension = exension;
     }
 
-    public Integer getCategory_id() {
-        return category_id;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategory_id(Integer category_id) {
-        this.category_id = category_id;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
-    
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 }

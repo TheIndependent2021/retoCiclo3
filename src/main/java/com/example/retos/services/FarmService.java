@@ -12,7 +12,7 @@ import com.example.retos.repositories.FarmRepository;
 public class FarmService {
     @Autowired
     private FarmRepository farmRepository;
-
+// CONSTRUCTOR
     public FarmService(FarmRepository farmRepository) {
         this.farmRepository = farmRepository;
     }
@@ -34,8 +34,8 @@ public class FarmService {
     }
 
     // POST
-    public Farm crearFarm(Farm Farm) {
-        return this.farmRepository.save(Farm);
+    public Farm crearFarm(Farm farm) {
+        return this.farmRepository.save(farm);
     }
 
     // DELETE
@@ -62,8 +62,8 @@ public class FarmService {
             if (farmSet.getExension() != null) {
                 farm.setExension(farmSet.getExension());
             }
-            if (farmSet.getCategory_id() != null) {
-                farm.setCategory_id(farmSet.getCategory_id());
+            if (farmSet.getCategory() != null) {
+                farm.setCategory(farmSet.getCategory());
             }
             this.farmRepository.save(farm);
             return true;

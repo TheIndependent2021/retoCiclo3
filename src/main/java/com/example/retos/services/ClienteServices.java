@@ -13,6 +13,7 @@ public class ClienteServices {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    // CONSTRUCTOR
     public ClienteServices(ClienteRepository clienteRepository) {
         this.clienteRepository = clienteRepository;
     }
@@ -25,12 +26,12 @@ public class ClienteServices {
 
     // GET ID
     public Cliente getCliente(int id) {
-        if(!this.clienteRepository.findById(id).isEmpty()){
+        if (!this.clienteRepository.findById(id).isEmpty()) {
             return this.clienteRepository.findById(id).get();
-        }else{
+        } else {
             return null;
         }
-       
+
     }
 
     // POST
@@ -40,31 +41,32 @@ public class ClienteServices {
 
     // DELETE
     public boolean eliminarCliente(int id) {
-          if(!this.clienteRepository.findById(id).isEmpty()){
+        if (!this.clienteRepository.findById(id).isEmpty()) {
             this.clienteRepository.deleteById(id);
             return true;
-        }else{
+        } else {
             return false;
         }
-      
+
     }
-    //PUT ACTUALIZAR
-    public boolean actualizarCliente(int id, Cliente clienteSet){
-        if(!this.clienteRepository.findById(id).isEmpty()){
+
+    // PUT ACTUALIZAR
+    public boolean actualizarCliente(int id, Cliente clienteSet) {
+        if (!this.clienteRepository.findById(id).isEmpty()) {
             Cliente cliente = clienteRepository.findById(id).get();
-            if(clienteSet.getName()!= null){
+            if (clienteSet.getName() != null) {
                 cliente.setName(clienteSet.getName());
             }
-            if(clienteSet.getEmail()!=null){
+            if (clienteSet.getEmail() != null) {
                 cliente.setEmail(clienteSet.getEmail());
             }
-            if(clienteSet.getAge()!=null){
+            if (clienteSet.getAge() != null) {
                 cliente.setAge(clienteSet.getAge());
             }
             this.clienteRepository.save(cliente);
             return true;
 
-        }else{
+        } else {
             return false;
         }
 

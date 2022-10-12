@@ -20,7 +20,7 @@ import com.example.retos.services.FarmService;
 
 @Service
 @RestController
-@RequestMapping("/farm")
+@RequestMapping("api/Farm")
 public class FarmController {
     @Autowired
     FarmService farmService;
@@ -30,7 +30,7 @@ public class FarmController {
     }
 
     // GET
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Farm>> getFarms() {
         return new ResponseEntity<List<Farm>>(this.farmService.getListFarm(), HttpStatus.OK);
     }
@@ -42,7 +42,7 @@ public class FarmController {
     }
 
     // POST CREAR
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<Farm> crearFarm(@RequestBody Farm Farm) {
         return new ResponseEntity<Farm>(this.farmService.crearFarm(Farm), HttpStatus.OK);
     }

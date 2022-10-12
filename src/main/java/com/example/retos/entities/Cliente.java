@@ -1,19 +1,23 @@
 package com.example.retos.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "client")
 public class Cliente implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "NAME")
@@ -25,6 +29,14 @@ public class Cliente implements Serializable {
     @Column(name = "AGE")
     private Integer age;
 
+    // relacion column ID con MESSAGES Y RESERVATION//
+    // messages
+    @OneToMany(mappedBy="idClient", cascade=CascadeType.ALL)
+    private Set<Messages>message=new HashSet<>();
+    // reservation
+    @OneToMany(mappedBy="idClient", cascade=CascadeType.ALL)
+    private Set <Reservation>reservation=new HashSet<>();
+    // constructor//
     public Cliente() {
     }
 
@@ -34,6 +46,22 @@ public class Cliente implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Set<Messages> getMessage() {
+        return message;
+    }
+
+    public void setMessage(Set<Messages> message) {
+        this.message = message;
+    }
+
+    public Set<Reservation> getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Set<Reservation> reservation) {
+        this.reservation = reservation;
     }
 
     public String getName() {
@@ -59,7 +87,5 @@ public class Cliente implements Serializable {
     public void setAge(Integer age) {
         this.age = age;
     }
-
-    
 
 }

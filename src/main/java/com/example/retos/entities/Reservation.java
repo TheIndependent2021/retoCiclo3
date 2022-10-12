@@ -16,15 +16,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
-@Table(name = "message")
-public class Messages implements Serializable {
+@Table(name = "reservation")
+public class Reservation implements Serializable {
     // *DECLARACION DE VARIABLES
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "MESSAGETEXT")
-    private String messageText;
+    @Column(name = "STARTDATE")
+    private String startDate;
+
+   
+
+    @Column(name = "DEVOLUTIONDATE")
+    private String devolutionDate;
     // variables con relaciones
     // clave forane cliente_id
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -38,12 +43,32 @@ public class Messages implements Serializable {
     private Farm farm;
 
     // *CONSTRUCTOR
-    public Messages() {
+    public Reservation() {
     }
 
-    // * */ GETTER Y SETTERS
+    // *GETTER Y SETTERS
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getDevolutionDate() {
+        return devolutionDate;
+    }
+
+    public void setDevolutionDate(String devolutionDate) {
+        this.devolutionDate = devolutionDate;
     }
 
     public Cliente getClient() {
@@ -60,18 +85,6 @@ public class Messages implements Serializable {
 
     public void setFarm(Farm farm) {
         this.farm = farm;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getMessagetext() {
-        return messageText;
-    }
-
-    public void setMessagetext(String messageText) {
-        this.messageText = messageText;
     }
 
 }

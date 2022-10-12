@@ -20,7 +20,7 @@ import com.example.retos.services.ClienteServices;
 
 @Service
 @RestController
-@RequestMapping("/client")
+@RequestMapping("api/Client")
 public class ClienteController {
     @Autowired
     ClienteServices clienteService;
@@ -30,7 +30,7 @@ public class ClienteController {
     }
 
     // GET
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Cliente>> getClientes() {
         return new ResponseEntity<List<Cliente>>(this.clienteService.getListCliente(), HttpStatus.OK);
     }
@@ -42,7 +42,7 @@ public class ClienteController {
     }
 
     // POST CREAR
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<Cliente> crearCliente(@RequestBody Cliente cliente) {
         return new ResponseEntity<Cliente>(this.clienteService.crearCliente(cliente), HttpStatus.OK);
     }

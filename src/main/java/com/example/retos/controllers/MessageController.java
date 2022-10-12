@@ -20,7 +20,7 @@ import com.example.retos.services.MessagesService;
 
 @Service
 @RestController
-@RequestMapping("/message")
+@RequestMapping("api/Message")
 public class MessageController {
     @Autowired
     MessagesService messageService;
@@ -30,7 +30,7 @@ public class MessageController {
     }
 
     // GET
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Messages>> getMessages() {
         return new ResponseEntity<List<Messages>>(this.messageService.getListMessages(), HttpStatus.OK);
     }
@@ -42,7 +42,7 @@ public class MessageController {
     }
 
     // POST CREAR
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<Messages> crearMessage(@RequestBody Messages Message) {
         return new ResponseEntity<Messages>(this.messageService.crearMessages(Message), HttpStatus.OK);
     }
